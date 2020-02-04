@@ -2,7 +2,7 @@
 
 <template>
     <div>
-        <h1>Items</h1>
+        <h1>List</h1>
 
         <table class="table table-hover">
             <thead>

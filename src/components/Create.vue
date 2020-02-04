@@ -4,7 +4,7 @@
      <div class="container">
         <div class="card">
             <div class="card-header">
-                <h3>Add Item</h3>
+                <h3>Add</h3>
             </div>
             <div class="card-body">
                 <form v-on:submit.prevent="addItem">
@@ -17,7 +17,7 @@
                         <input type="text" class="form-control" v-model="item.body"/>
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Add Item"/>
+                        <input type="submit" class="btn btn-primary" value="Add"/>
                     </div>
                 </form>
             </div>
@@ -40,6 +40,7 @@ export default {
            let uri = 'https://jsonplaceholder.typicode.com/posts';
             this.axios.post(uri, this.item).then((response) => {
                 console.log(response.data)
+                this.item = {};
             });
         }
     }

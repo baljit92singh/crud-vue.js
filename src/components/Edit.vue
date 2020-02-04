@@ -4,7 +4,7 @@
     <div class="container">
         <div class="card">
             <div class="card-header">
-                <h3>Edit Item</h3>
+                <h3>Edit</h3>
             </div>
             <div class="card-body">
                 <form v-on:submit.prevent="updateItem">
@@ -17,7 +17,7 @@
                         <input type="text" class="form-control" v-model="item.body" />
                     </div>
                     <div class="form-group">
-                        <input type="submit" class="btn btn-primary" value="Update Item"/>
+                        <input type="submit" class="btn btn-primary" value="Update"/>
                     </div>
                 </form>
             </div>
@@ -26,31 +26,31 @@
 </template>
 <script>
 export default {
-    // data(){
-    //         return{
-    //             item:{}
-    //         }
-    //     },
+    data(){
+            return{
+                item:{}
+            }
+        },
 
-    //     created: function(){
-    //         this.getItem();
-    //     },
+        created: function(){
+            this.getItem();
+        },
 
-    //     methods: {
-    //         getItem()
-    //         {
-    //           let uri = 'https://jsonplaceholder.typicode.com/posts/' + this.$route.params.id;
-    //             this.axios.get(uri).then((response) => {
-    //                 this.item = response.data;
-    //             });
-    //         },
-    //         updateItem()
-    //         {
-    //           let uri = 'https://jsonplaceholder.typicode.com/posts/' + this.$route.params.id;
-    //             this.axios.post(uri, this.item).then((response) => {
-    //               this.$router.push({name: 'Index'});
-    //             });
-    //         }
-    //     }
+        methods: {
+            getItem()
+            {
+              let uri = 'https://jsonplaceholder.typicode.com/posts/' + this.$route.params.id;
+                this.axios.get(uri).then((response) => {
+                    this.item = response.data;
+                });
+            },
+            // updateItem()
+            // {
+            //   let uri = 'https://jsonplaceholder.typicode.com/posts/' + this.$route.params.id;
+            //     this.axios.post(uri, this.item).then((response) => {
+            //       this.$router.push({name: 'Index'});
+            //     });
+            // }
+        }
 }
 </script>
