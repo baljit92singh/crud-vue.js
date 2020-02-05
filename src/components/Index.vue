@@ -64,8 +64,10 @@ export default {
     // },
     deleteItem(id) {
       let uri = "https://jsonplaceholder.typicode.com/posts/" + id;
-      this.items.splice(id, 1);
+      // this.items.splice(id, 1);
       this.axios.get(uri);
+      const index = this.itemsList.findIndex(order => order.id === id);
+      this.itemsList.splice(index, 1);
       this.$toasted.show("Deleted successfully", {
         theme: "bubble",
         position: "top-right",
