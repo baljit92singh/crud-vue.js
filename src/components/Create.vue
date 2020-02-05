@@ -33,18 +33,41 @@ export default {
   components: {},
   data() {
     return {
-      item: {}
+      item: {
+        title: "",
+        body: ""
+      }
     };
   },
   methods: {
+    // setNewTodo(e) {
+    //   this.$store.dispatch("setNewTodo", e.target.value);
+    // },
     addItem() {
+      // console.log(this.item);
+      // this.$store.dispatch("addItems", this.item);
+      // // this.$store.dispatch("clearNewTodo");
+      // this.item = {};
       console.log(this.item);
       let uri = "https://jsonplaceholder.typicode.com/posts";
       this.axios.post(uri, this.item).then(response => {
         console.log(response.data);
         this.item = {};
+        this.$toasted.show("Added successfully!", {
+          theme: "bubble",
+          position: "top-right",
+          duration: 5000
+        });
       });
     }
+    // computed: {
+    //   newItem() {
+    //     return this.$store.getters.newItem;
+    //   },
+    //   itemsList() {
+    //     return this.$store.getters.items;
+    //   }
+    // }
   }
 };
 </script>

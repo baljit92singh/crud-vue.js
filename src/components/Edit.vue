@@ -53,6 +53,11 @@ export default {
       this.axios.put(uri, this.item).then(response => {
         console.log(response);
         this.$router.push({ name: "Index" });
+        this.$toasted.show("Updated successfully!", {
+          theme: "bubble",
+          position: "top-right",
+          duration: 5000
+        });
       });
     }
   }

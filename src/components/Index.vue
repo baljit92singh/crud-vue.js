@@ -14,7 +14,7 @@
       </thead>
 
       <tbody>
-        <tr v-for="item in items" :key="item.id">
+        <tr v-for="item in itemsList" :key="item.id">
           <td>{{ item.id }}</td>
           <td>{{ item.title }}</td>
           <td>{{ item.body }}</td>
@@ -44,21 +44,33 @@ export default {
     };
   },
 
-  created: function() {
-    this.fetchItems();
+  created() {
+    this.$store.dispatch("loadItems");
   },
-
-  methods: {
-    fetchItems() {
-      let uri = "https://jsonplaceholder.typicode.com/posts";
-      this.axios.get(uri).then(response => {
-        this.items = response.data;
-      });
+  computed: {
+    newItem() {
+      return this.$store.getters.newItem;
     },
+    itemsList() {
+      return this.$store.getters.items;
+    }
+  },
+  methods: {
+    // fetchItems() {
+    // let uri = "https://jsonplaceholder.typicode.com/posts";
+    // this.axios.get(uri).then(response => {
+    //   this.items = response.data;
+    // });
+    // },
     deleteItem(id) {
       let uri = "https://jsonplaceholder.typicode.com/posts/" + id;
       this.items.splice(id, 1);
       this.axios.get(uri);
+      this.$toasted.show("Deleted successfully", {
+        theme: "bubble",
+        position: "top-right",
+        duration: 5000
+      });
     }
   }
 };
