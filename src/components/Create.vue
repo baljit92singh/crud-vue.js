@@ -1,5 +1,3 @@
-// Create.vue
-
 <template>
   <div class="container">
     <div class="card">
@@ -19,7 +17,6 @@
           <div class="form-group">
             <div class="set_button">
               <input type="submit" class="btn btn-primary" value="Add" />
-              <!-- <input type="submit" class="btn btn-primary" value="Cancel" /> -->
               <router-link :to="{ name: 'Index' }" class="nav-link"
                 >Cancel</router-link
               >
