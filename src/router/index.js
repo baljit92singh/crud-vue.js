@@ -1,18 +1,19 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-// import Home from "../views/Home.vue";
+import Home from "../views/Home.vue";
 import Create from "@/components/Create.vue";
 import Edit from "@/components/Edit.vue";
 import Index from "@/components/Index.vue";
 import NProgress from "nprogress";
+
 Vue.use(VueRouter);
 
 const routes = [
-  // {
-  //   path: "/",
-  //   name: "home",
-  //   component: Home
-  // },
+  {
+    path: "/home",
+    name: "Home",
+    component: Home
+  },
   // {
   //   path: "/about",
   //   name: "about",
@@ -31,11 +32,11 @@ const routes = [
   //   component: () =>
   //     import(/* webpackChunkName: "about" */ "../views/Contact.vue")
   // },
-  {
-    path: "/",
-    name: "Index",
-    component: Index
-  },
+  // {
+  //   path: "/",
+  //   name: "Index",
+  //   component: Index
+  // },
   {
     path: "/create",
     name: "Create",

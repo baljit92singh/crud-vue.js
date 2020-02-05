@@ -19,16 +19,23 @@
           <td>{{ item.title }}</td>
           <td>{{ item.body }}</td>
           <td>
-            <router-link :to="{name: 'Edit', params: { id: item.id }}" class="btn btn-primary">Edit</router-link>
+            <router-link
+              :to="{ name: 'Edit', params: { id: item.id } }"
+              class="btn btn-primary"
+              >Edit</router-link
+            >
           </td>
           <td>
-            <button class="btn btn-danger" v-on:click="deleteItem(item.id)">Delete</button>
+            <button class="btn btn-danger" v-on:click="deleteItem(item.id)">
+              Delete
+            </button>
           </td>
         </tr>
       </tbody>
     </table>
   </div>
 </template>
+
 <script>
 export default {
   data() {
