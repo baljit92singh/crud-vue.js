@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container">
-    <nav class="navbar navbar-expand-sm bg-light">
+    <nav class="navbar navbar-expand-sm bg-dark">
       <ul class="navbar-nav">
         <li class="nav-item">
           <router-link :to="{ name: 'Create' }" class="nav-link">Add</router-link>
@@ -19,6 +19,7 @@
 </template>
 
 <style>
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s;

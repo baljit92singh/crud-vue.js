@@ -32,6 +32,11 @@ const routes = [
   //     import(/* webpackChunkName: "about" */ "../views/Contact.vue")
   // },
   {
+    path: "/",
+    name: "Index",
+    component: Index
+  },
+  {
     path: "/create",
     name: "Create",
     component: Create
@@ -48,7 +53,6 @@ const routes = [
   }
 ];
 
-
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
@@ -56,14 +60,15 @@ const router = new VueRouter({
 });
 
 router.beforeResolve((to, from, next) => {
+  // console.log(to, from, next);
   if (to.name) {
-      NProgress.start()
+    NProgress.start();
   }
-  next()
+  next();
 });
 
 router.afterEach(() => {
-  NProgress.done()
+  NProgress.done();
 });
 
 export default router;
