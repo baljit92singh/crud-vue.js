@@ -11,24 +11,36 @@ export default new Vuex.Store({
     newItem: {
       title: "",
       body: ""
-    }
+    },
+    loading: false
   },
-  getters: {
-    newItem: state => state.newItem,
-    items: state => state.items
-  },
+  getters: {},
   mutations: {
     // Used for the changing the state
+    startLoading(state) {
+      state.loading = true;
+    },
+    stopLoading(state) {
+      state.loading = false;
+    },
     SET_ITEMS_LIST(state, items) {
       state.items = items;
     },
-    ADD_ITEMS_LIST(state, todoObject) {
-      console.log(state, todoObject);
-      state.items.push(todoObject);
+    ADD_ITEM_TO_LIST(state, items) {
+      console.log(state, items);
+      state.items.push(items);
+    },
+    UPDATE_ITEM_TO_LIST(state, items) {
+      console.log(state, items);
+      // console.log(state.items);
+      // let updateItem = state.items.find(a => a.id === items.data.id);
+      // console.log(updateItem);
+      // let index = state.items.indexOf(updateItem);
+      // state.items[index].push(items);
+    },
+    DELETE_ITEM_TO_LIST(state, items) {
+      console.log(state, items);
     }
-    // CLEAR_NEW_ITEM(state) {
-    //   state.newItem = "";
-    // }
   },
   actions: {
     //load items methods
@@ -40,28 +52,32 @@ export default new Vuex.Store({
           commit("SET_ITEMS_LIST", items);
         });
     },
-    addItems({ commit, state }) {
-      console.log(commit, state);
-      // if (!state.newItem) {
-      //   // do not add empty newItem
-      //   return;
-      // }
-      // const todo = {
-      //   title: state.title,
-      //   body: state.body,
-      //   // completed: false
-      // };
-      // console.log(todo);
+    addItem(context, data) {
+      console.log(context, data);
       axios
-        .get("https://jsonplaceholder.typicode.com/posts", state.newItem)
-        .then(r => r.data)
-        .then(items => {
-          commit("ADD_ITEMS_LIST", items);
+        .post("https://jsonplaceholder.typicode.com/posts", data)
+        .then(response => {
+          context.commit("ADD_ITEM_TO_LIST", response);
+          // state.tasks = response.data.data;
+        });
+    },
+    updateItem(context, data) {
+      console.log(context, data);
+      axios
+        .put("https://jsonplaceholder.typicode.com/posts/" + data.id, data)
+        .then(response => {
+          context.commit("UPDATE_ITEM_TO_LIST", response);
+          // state.tasks = response.data.data;
+        });
+    },
+    deleteItem(context, id) {
+      axios
+        .delete("https://jsonplaceholder.typicode.com/posts/" + id)
+        .then(response => {
+          context.commit("DELETE_ITEM_TO_LIST", response);
+          // state.tasks = response.data.data;
         });
     }
-    // clearNewTodo({ commit }) {
-    //   commit("CLEAR_NEW_ITEM");
-    // }
   },
   modules: {}
 });

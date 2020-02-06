@@ -12,7 +12,12 @@
           </div>
           <div class="form-group">
             <label>Body:</label>
-            <input type="text" class="form-control" v-model="item.body" />
+            <textarea
+              type="text"
+              class="form-control"
+              v-model="item.body"
+              rows="5"
+            ></textarea>
           </div>
           <div class="form-group">
             <div class="set_button">
@@ -45,21 +50,36 @@ export default {
         "https://jsonplaceholder.typicode.com/posts/" + this.$route.params.id;
       this.axios.get(uri).then(response => {
         this.item = response.data;
+        console.log(this.item);
       });
     },
     updateItem() {
-      let uri =
-        "https://jsonplaceholder.typicode.com/posts/" + this.$route.params.id;
-      this.axios.put(uri, this.item).then(response => {
-        console.log(response);
-        this.$router.push({ name: "Index" });
-        this.$toasted.show("Updated successfully!", {
-          theme: "bubble",
-          position: "top-right",
-          duration: 5000
-        });
-      });
+      this.$store
+        .dispatch("updateItem", this.item)
+        .then(res => {
+          console.log(res);
+          this.$toasted.show("Updated successfully!", {
+            theme: "bubble",
+            position: "top-right",
+            duration: 5000
+          });
+          this.$router.push("/index");
+        })
+        .catch(err => console.log(err));
     }
+    // updateItem() {
+    //   let uri =
+    //     "https://jsonplaceholder.typicode.com/posts/" + this.$route.params.id;
+    //   this.axios.put(uri, this.item).then(response => {
+    //     console.log(response);
+    //     this.$router.push({ name: "Index" });
+    //     this.$toasted.show("Updated successfully!", {
+    //       theme: "bubble",
+    //       position: "top-right",
+    //       duration: 5000
+    //     });
+    //   });
+    // }
   }
 };
 </script>

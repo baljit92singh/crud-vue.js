@@ -9,7 +9,7 @@ import Toasted from "vue-toasted";
 
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/nprogress/nprogress.css";
-
+import "@/plugins/echarts";
 // Vue.use(VueRouter);
 Vue.use(VueAxios, axios);
 Vue.use(Toasted);

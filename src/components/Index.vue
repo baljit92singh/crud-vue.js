@@ -14,7 +14,7 @@
       </thead>
 
       <tbody>
-        <tr v-for="item in itemsList" :key="item.id">
+        <tr v-for="item in items" :key="item.id">
           <td>{{ item.id }}</td>
           <td>{{ item.title }}</td>
           <td>{{ item.body }}</td>
@@ -35,45 +35,40 @@
     </table>
   </div>
 </template>
-
 <script>
-export default {
-  data() {
-    return {
-      items: []
-    };
-  },
+import { mapState } from "vuex";
 
-  created() {
+export default {
+  mounted() {
     this.$store.dispatch("loadItems");
   },
-  computed: {
-    newItem() {
-      return this.$store.getters.newItem;
-    },
-    itemsList() {
-      return this.$store.getters.items;
-    }
-  },
+  computed: mapState(["items"]),
   methods: {
-    // fetchItems() {
-    // let uri = "https://jsonplaceholder.typicode.com/posts";
-    // this.axios.get(uri).then(response => {
-    //   this.items = response.data;
-    // });
-    // },
     deleteItem(id) {
-      let uri = "https://jsonplaceholder.typicode.com/posts/" + id;
-      // this.items.splice(id, 1);
-      this.axios.get(uri);
-      const index = this.itemsList.findIndex(order => order.id === id);
-      this.itemsList.splice(index, 1);
-      this.$toasted.show("Deleted successfully", {
-        theme: "bubble",
-        position: "top-right",
-        duration: 5000
-      });
+      this.$store
+        .dispatch("deleteItem", id)
+        .then(res => {
+          console.log(res);
+          this.$toasted.show("Deleted successfully!", {
+            theme: "bubble",
+            position: "top-right",
+            duration: 5000
+          });
+        })
+        .catch(err => console.log(err));
     }
+    // deleteItem(id) {
+    //   let uri = "https://jsonplaceholder.typicode.com/posts/" + id;
+    //   // this.items.splice(id, 1);
+    //   this.axios.get(uri);
+    //   const index = this.itemsList.findIndex(order => order.id === id);
+    //   this.itemsList.splice(index, 1);
+    //   this.$toasted.show("Deleted successfully", {
+    //     theme: "bubble",
+    //     position: "top-right",
+    //     duration: 5000
+    //   });
+    // }
   }
 };
 </script>

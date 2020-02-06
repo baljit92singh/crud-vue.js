@@ -12,7 +12,12 @@
           </div>
           <div class="form-group">
             <label>Body:</label>
-            <input type="text" class="form-control" v-model="item.body" />
+            <textarea
+              type="text"
+              class="form-control"
+              v-model="item.body"
+              rows="5"
+            ></textarea>
           </div>
           <div class="form-group">
             <div class="set_button">
@@ -40,34 +45,36 @@ export default {
     };
   },
   methods: {
-    // setNewTodo(e) {
-    //   this.$store.dispatch("setNewTodo", e.target.value);
-    // },
     addItem() {
+      let item = {
+        title: this.item.title,
+        body: this.item.body
+      };
+      console.log(item);
+      this.$store
+        .dispatch("addItem", item)
+        .then(res => {
+          console.log(res);
+          this.$toasted.show("Added successfully!", {
+            theme: "bubble",
+            position: "top-right",
+            duration: 5000
+          });
+          this.$router.push("/index");
+        })
+        .catch(err => console.log(err));
       // console.log(this.item);
-      // this.$store.dispatch("addItems", this.item);
-      // // this.$store.dispatch("clearNewTodo");
-      // this.item = {};
-      console.log(this.item);
-      let uri = "https://jsonplaceholder.typicode.com/posts";
-      this.axios.post(uri, this.item).then(response => {
-        console.log(response.data);
-        this.item = {};
-        this.$toasted.show("Added successfully!", {
-          theme: "bubble",
-          position: "top-right",
-          duration: 5000
-        });
-      });
+      // let uri = "https://jsonplaceholder.typicode.com/posts";
+      // this.axios.post(uri, this.item).then(response => {
+      //   console.log(response.data);
+      //   this.item = {};
+      //   this.$toasted.show("Added successfully!", {
+      //     theme: "bubble",
+      //     position: "top-right",
+      //     duration: 5000
+      //   });
+      // });
     }
-    // computed: {
-    //   newItem() {
-    //     return this.$store.getters.newItem;
-    //   },
-    //   itemsList() {
-    //     return this.$store.getters.items;
-    //   }
-    // }
   }
 };
 </script>
